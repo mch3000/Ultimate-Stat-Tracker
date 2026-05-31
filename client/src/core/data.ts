@@ -38,8 +38,8 @@ function player(
 // for the demo is safe.
 const EMPIRE_GID     = 1
 const BREEZE_GID     = 2
-const LIZARDS_GID    = 3
-const GOOSELINGS_GID = 4
+const WEDGIES_GID    = 3
+const BAGS_GID = 4
 
 const EMPIRE = team('A', 'New York Empire', 'NYE', '#1f4788')
 const BREEZE = team('B', 'DC Breeze',       'DCB', '#ff6640')
@@ -83,38 +83,50 @@ const BREEZE_ROSTER: Player[] = [
 // ─── BUML 2026-05-11 rosters ─────────────────────────────────────────────────
 // Real teams for live test recording. No portraits — names and gender only.
 
-const LIZARDS_ROSTER: Player[] = [
-  player(27, 'Adilia Murabito',    'A', 'F'),
-  player(28, 'Bell Silverthorne',  'A', 'F'),
-  player(29, 'Natalie Taylor',     'A', 'F'),
-  player(30, 'Tanya Dodgen',       'A', 'F'),
-  player(31, 'Alex Smith',         'A', 'M'),
-  player(32, 'Ben Duivenvoorden',  'A', 'M'),
-  player(33, 'Daniel Blacklock',   'A', 'M'),
-  player(34, 'Israel Sorondo',     'A', 'M'),
-  player(35, 'Keith Algar',        'A', 'M'),
-  player(36, 'Vern Verrier',       'A', 'M'),
+const WEDGIES_ROSTER: Player[] = [
+  player(27, 'Dana',    'A', 'F'),
+  player(28, 'Imo',  'A', 'F'),
+  player(29, 'Doog',     'A', 'F'),
+  player(30, 'Lorna',       'A', 'F'),
+  player(31, 'Lou',       'A', 'F'),
+  player(32, 'Rosa',       'A', 'F'),
+  player(33, 'Ruby',       'A', 'F'),
+  player(34, 'Samara',       'A', 'F'),
+  player(35, 'Sheryn',       'A', 'F'),
+  player(36, 'Zab',       'A', 'F'),
+  player(48, 'Asheek',         'A', 'M'),
+  player(49, 'Ben',  'A', 'M'),
+  player(50, 'Mikey',   'A', 'M'),
+  player(51, 'Myall',     'A', 'M'),
+  player(52, 'Sam',        'A', 'M'),
+  player(53, 'Tim',       'A', 'M'),
+  player(54, 'Asher',       'A', 'M'),
+  player(55, 'Kwong',       'A', 'M'),
+  player(56, 'Svatos',       'A', 'M'),
+  player(57, 'Wan',       'A', 'M'),
 ]
 
-const GOOSELINGS_ROSTER: Player[] = [
-  player(37, 'Ana Monica Gabasa',  'B', 'F'),
-  player(38, 'Bridget Walters',    'B', 'F'),
-  player(39, 'Chloe Yee Ching Ong','B', 'F'),
-  player(40, 'Drew Crawford',      'B', 'F'),
-  player(41, 'Jane Goh',           'B', 'F'),
-  player(42, 'Nicole Tan',         'B', 'F'),
-  player(43, 'Yeanna He',          'B', 'F'),
-  player(44, 'Isobel Ding',        'B', 'F'),
-  player(45, 'Ikkei Maehara',      'B', 'M'),
-  player(46, 'Kim Sun Hyeok',      'B', 'M'),
-  player(47, 'Sun Hong Kim',       'B', 'M'),
+const BAGS_ROSTER: Player[] = [
+  player(37, 'Ariel',  'B', 'F'),
+  player(38, 'Penny',    'B', 'F'),
+  player(39, 'Celeste','B', 'F'),
+  player(40, 'Emily',      'B', 'F'),
+  player(41, 'Chloe',           'B', 'F'),
+  player(42, 'Rachel',         'B', 'F'),
+  player(43, 'A Young',          'B', 'M'),
+  player(44, 'Sangah',        'B', 'M'),
+  player(45, 'Andy',      'B', 'M'),
+  player(46, 'Jack',      'B', 'M'),
+  player(47, 'Nic',       'B', 'M'),
+  player(58, 'Harrison',       'B', 'M'),
+  player(59, 'Paul',       'B', 'M'),
 ]
 
 // Lizards play in white today (the two teams' usual red + maroon were too
 // similar on a dark canvas — white reads cleanly against the maroon as the
 // opposing outline).
-const LIZARDS    = team('A', 'Lizards Eastside', 'LIZ', '#ffffff')
-const GOOSELINGS = team('B', 'Gooselings',       'GSL', '#6e1a1a')
+const WEDGIES    = team('A', 'Wedgies', 'Wed', '#ffffff')
+const BAGS = team('B', 'Bags',       'BAG', '#6e1a1a')
 
 // ─── Seed function ────────────────────────────────────────────────────────────
 
@@ -153,17 +165,12 @@ export function seedTeamsAndGames(): SeedResult {
   const teamInputs: TeamEventInput[] = []
   emitTeamWithRoster(teamInputs, EMPIRE_GID,     EMPIRE,     EMPIRE_ROSTER)
   emitTeamWithRoster(teamInputs, BREEZE_GID,     BREEZE,     BREEZE_ROSTER)
-  emitTeamWithRoster(teamInputs, LIZARDS_GID,    LIZARDS,    LIZARDS_ROSTER)
-  emitTeamWithRoster(teamInputs, GOOSELINGS_GID, GOOSELINGS, GOOSELINGS_ROSTER)
+  emitTeamWithRoster(teamInputs, WEDGIES_GID,    WEDGIES,    WEDGIES_ROSTER)
+  emitTeamWithRoster(teamInputs, BAGS_GID, BAGS, BAGS_ROSTER)
 
   // Order matters: deriveScheduledGames preserves insertion order, so BUML is
   // emitted first to appear at the top of GameSetup.
   const gameInputs: ScheduledGameEventInput[] = [
-    addScheduledGame({
-      gameId: 5, name: 'BUML 2026-05-11', scheduledTime: '19:00',
-      teamAGlobalId: LIZARDS_GID, teamBGlobalId: GOOSELINGS_GID,
-      halfTimeAt: 9, scoreCapAt: 17,
-    }),
     addScheduledGame({
       gameId: 1, name: 'Empire vs Breeze', scheduledTime: '09:00',
       teamAGlobalId: EMPIRE_GID, teamBGlobalId: BREEZE_GID,
